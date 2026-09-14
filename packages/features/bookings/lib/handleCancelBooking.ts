@@ -143,7 +143,8 @@ async function handler(input: CancelBookingInput, dependencies?: Dependencies) {
     throw new HttpError({ statusCode: 400, message: "User not found" });
   }
 
-  if (bookingToDelete.eventType?.disableCancelling) {
+  if ((bookingToDelete.eventType?.disableCancelling === 'BOTH_HOST_GUESTS') || 
+  ((bookingToDelete.eventType?.disableCancelling === 'GUESTS') && (bookingToDelete.eventType?.owner?.id === bookingToDelete.eventType?.userId)) ) {
     throw new HttpError({
       statusCode: 400,
       message: "This event type does not allow cancellations",
