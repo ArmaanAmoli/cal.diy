@@ -23,6 +23,7 @@ import type { RecurringEvent } from "@calcom/types/Calendar";
 import type { UserProfile } from "@calcom/types/UserProfile";
 import type { z } from "zod";
 import type { EventType } from "./getEventTypeById";
+import {DisableCancelling} from "@calcom/prisma/enums";
 
 export type CustomInputParsed = typeof customInputSchema._output;
 
@@ -365,7 +366,7 @@ export type EventTypeUpdateInput = {
   seatsPerTimeSlot?: number | null;
   onlyShowFirstAvailableSlot?: boolean;
   showOptimizedSlots?: boolean | null;
-  disableCancelling?: boolean | null;
+  disableCancelling?: DisableCancelling | null;
   disableRescheduling?: boolean | null;
   requiresCancellationReason?: CancellationReasonRequirement | null;
   minimumRescheduleNotice?: number | null;
