@@ -118,7 +118,7 @@ export type FormValues = {
   customInputs: CustomInputParsed[];
   schedule: number | null;
   useEventLevelSelectedCalendars: boolean;
-  disabledCancelling: boolean;
+  disabledCancelling: DisableCancelling;
   disabledRescheduling: boolean;
   minimumRescheduleNotice: number | null;
   periodType: PeriodType;
