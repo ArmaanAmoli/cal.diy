@@ -8,5 +8,11 @@
 CREATE TYPE "public"."DisableCancelling" AS ENUM ('GUESTS', 'BOTH_HOST_GUESTS', 'NOBODY');
 
 -- AlterTable
-ALTER TABLE "public"."EventType" DROP COLUMN "disableCancelling",
-ADD COLUMN     "disableCancelling" "public"."DisableCancelling" DEFAULT 'NOBODY';
+ALTER TABLE "public"."EventType"
+  ALTER COLUMN "disableCancelling" DROP DEFAULT,
+  ALTER COLUMN "disableCancelling" TYPE "public"."DisableCancelling"
+    USING CASE
+      WHEN "disableCancelling" THEN 'BOTH_HOST_GUESTS'::"public"."DisableCancelling"
+      ELSE 'NOBODY'::"public"."DisableCancelling"
+    END,
+  ALTER COLUMN "disableCancelling" SET DEFAULT 'NOBODY';
