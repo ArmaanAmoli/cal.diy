@@ -142,17 +142,17 @@ async function handler(input: CancelBookingInput, dependencies?: Dependencies) {
   if (!bookingToDelete.userId || !bookingToDelete.user) {
     throw new HttpError({ statusCode: 400, message: "User not found" });
   }
-  
+
+  const isCancellationUserHost =
+    bookingToDelete.userId === userId || bookingToDelete.user.email === cancelledBy;
+
   if ((bookingToDelete.eventType?.disableCancelling === 'BOTH_HOST_GUESTS') || 
-  ((bookingToDelete.eventType?.disableCancelling === 'GUESTS') && (body.cancelledBy !== bookingToDelete.user.email)) ) {
+  ((bookingToDelete.eventType?.disableCancelling === 'GUESTS') && !isCancellationUserHost ) ) {
     throw new HttpError({
       statusCode: 400,
       message: "This event type does not allow cancellations",
     });
   }
-
-  const isCancellationUserHost =
-    bookingToDelete.userId === userId || bookingToDelete.user.email === cancelledBy;
 
   const isReasonRequired = isCancellationReasonRequired(
     bookingToDelete.eventType?.requiresCancellationReason,
