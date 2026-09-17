@@ -724,14 +724,14 @@ export const EventAdvancedTab = ({
             render={
               ({ field: { onChange, value } }) => {
                 const disableCancellation = [
-                  { value: DisableCancelling.GUESTS, label: t("For Guests only") },
+                  { value: DisableCancelling.GUESTS, label: t("for_guests_only") },
                   {
                     value: DisableCancelling.BOTH_HOST_GUESTS,
-                    label: t("For Host and Guests"),
+                    label: t("for_host_and_guests"),
                   },
                   {
                     value: DisableCancelling.NOBODY,
-                    label: t("For Nobody")
+                    label: t("for_nobody")
                   }
                 ];
                 return (
@@ -760,26 +760,6 @@ export const EventAdvancedTab = ({
                   
                 </>);
               }
-
-              // <SettingsToggle
-              //   labelClassName="text-sm"
-              //   toggleSwitchAtTheEnd={true}
-              //   switchContainerClassName="border-subtle rounded-lg border py-6 px-4 sm:px-6"
-              //   title={t("disable_cancelling")}
-              //   data-testid="disable-cancelling-toggle"
-              //   {...disableCancellingLocked}
-              //   description={
-                  // <LearnMoreLink
-                  //   t={t}
-                  //   i18nKey="description_disable_cancelling"
-                  //   href="https://cal.com/help/event-types/disable-canceling-rescheduling#disable-cancelling"
-                  // />
-              //   }
-              //   checked={value}
-              //   onCheckedChange={(val) => {
-              //     onChange(val);
-              //   }}
-              // />
             }
           />
 
