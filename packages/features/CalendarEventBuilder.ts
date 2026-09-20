@@ -18,7 +18,8 @@ import {
   type Prisma,
   type User,
 } from "@calcom/prisma/client";
-import type { SchedulingType , DisableCancelling} from "@calcom/prisma/enums";
+import type { SchedulingType } from "@calcom/prisma/enums";
+import { DisableCancelling } from "@calcom/prisma/enums";
 import { bookingResponses as bookingResponsesSchema } from "@calcom/prisma/zod-utils";
 import type { AppsStatus, CalEventResponses, CalendarEvent, Person } from "@calcom/types/Calendar";
 import type { VideoCallData } from "@calcom/types/VideoApiAdapter";
