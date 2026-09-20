@@ -239,8 +239,13 @@ export function isActionDisabled(actionId: string, context: BookingActionContext
 
   const {loggedInUser , user} = booking; // user = booking host
   const isHost = user?.id != null && loggedInUser?.userId === user.id;
-  const disabledCancelling = (isDisabledCancelling==='NOBODY' || (isDisabledCancelling==='GUESTS' && isHost))?false:true
-  
+  const effectiveDisabledCancelling = isDisabledCancelling ?? DisableCancelling.NOBODY;
+  const disabledCancelling =
+    effectiveDisabledCancelling === DisableCancelling.NOBODY ||
+    (effectiveDisabledCancelling === DisableCancelling.GUESTS && isHost)
+      ? false
+      : true;
+
   switch (actionId) {
     case "reschedule":
     case "reschedule_request":
