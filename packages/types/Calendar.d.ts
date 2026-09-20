@@ -13,8 +13,7 @@ import type {
   Prisma,
   SelectedCalendar as _SelectedCalendar,
 } from "@calcom/prisma/client";
-import type { SchedulingType } from "@calcom/prisma/enums";
-import { DisableCancelling } from "@calcom/prisma/enums";
+import type { SchedulingType, DisableCancelling } from "@calcom/prisma/enums";
 import type { CredentialForCalendarService } from "@calcom/types/Credential";
 
 import type { Ensure } from "./utils";
