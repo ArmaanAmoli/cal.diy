@@ -238,7 +238,7 @@ export function isActionDisabled(actionId: string, context: BookingActionContext
   } = context;
 
   const {loggedInUser , user} = booking; // user = booking host
-  const isHost = (user.id === loggedInUser.userId);
+  const isHost = user?.id != null && loggedInUser?.userId === user.id;
   const disabledCancelling = (isDisabledCancelling==='NOBODY' || (isDisabledCancelling==='GUESTS' && isHost))?false:true
   
   switch (actionId) {
