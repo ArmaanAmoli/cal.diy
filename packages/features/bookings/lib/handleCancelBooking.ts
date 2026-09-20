@@ -143,8 +143,7 @@ async function handler(input: CancelBookingInput, dependencies?: Dependencies) {
     throw new HttpError({ statusCode: 400, message: "User not found" });
   }
 
-  const isCancellationUserHost =
-    bookingToDelete.userId === userId || bookingToDelete.user.email === cancelledBy;
+  const isCancellationUserHost = bookingToDelete.userId === userId;
 
   if ((bookingToDelete.eventType?.disableCancelling === 'BOTH_HOST_GUESTS') || 
   ((bookingToDelete.eventType?.disableCancelling === 'GUESTS') && !isCancellationUserHost ) ) {
