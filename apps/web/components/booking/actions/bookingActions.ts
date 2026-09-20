@@ -237,6 +237,10 @@ export function isActionDisabled(actionId: string, context: BookingActionContext
     isRejected,
   } = context;
 
+  const {loggedInUser , user} = booking; // user = booking host
+  const isHost = (user.id === loggedInUser.userId);
+  const disabledCancelling = (isDisabledCancelling==='NOBODY' || (isDisabledCancelling==='GUESTS' && isHost))?false:true
+  
   switch (actionId) {
     case "reschedule":
     case "reschedule_request":
@@ -261,7 +265,6 @@ export function isActionDisabled(actionId: string, context: BookingActionContext
         isWithinMinimumNotice
       );
     case "cancel":
-      const disabledCancelling = (isDisabledCancelling==='NOBODY' || (isDisabledCancelling==='GUESTS' && isAttendee))?false:true
       return disabledCancelling || isBookingInPast || isCancelled || isRejected;
     case "view_recordings":
       return !(isBookingInPast && booking.status === BookingStatus.ACCEPTED && context.isCalVideoLocation);
