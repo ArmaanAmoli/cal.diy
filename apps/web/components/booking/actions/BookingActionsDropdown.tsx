@@ -41,7 +41,6 @@ import {
   shouldShowEditActions,
   shouldShowPendingActions,
 } from "./bookingActions";
-import { DisableCancelling } from "@calcom/prisma/enums";
 
 interface BookingActionsDropdownProps {
   booking: BookingItemProps;
@@ -192,14 +191,7 @@ export function BookingActionsDropdown({
     booking.location === "integrations:daily" ||
     (typeof booking.location === "string" && booking.location.trim() === "");
 
-  const loggedInUserId = booking.loggedInUser?.userId;
-  const hostUserId = booking.user.id;
-  console.log("[host user id]: " , hostUserId);
-  const disableCancelling:DisableCancelling = booking.eventType.disableCancelling;
-  
-  const isDisabledCancelling:boolean = (
-    (hostUserId === loggedInUserId && (disableCancelling==='GUESTS' || disableCancelling==='NOBODY') ) || 
-    (hostUserId !== loggedInUserId && disableCancelling==='NOBODY' )) ? false : true;
+  const isDisabledCancelling = booking.eventType.disableCancelling;
 
   const isDisabledRescheduling = booking.eventType.disableRescheduling;
 
